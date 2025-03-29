@@ -170,7 +170,8 @@ app.use(express.json());
 
 // Function to scrape movies from TMDb
 async function scrapeMovies() {
-    const browser = await chromium.launch({ headless: true });
+    const browser = await chromium.launch({
+        headless: true });
     const page = await browser.newPage();
     const url = `https://www.themoviedb.org/movie/`;
     await page.goto(url, { waitUntil: 'domcontentloaded' });
