@@ -1,0 +1,35 @@
+node_modules/
+tests/
+docs/
+.github/
+.gitignore
+README.md
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Environment variables (DO NOT commit secrets!)
+.env
+
+# Heroku-specific files
+.heroku/
+
+# Logs
+logs/
+*.log
+logfiles/
+debug.log
+# IDE/editor settings
+.vscode/
+.idea/
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Testing & Build files
+coverage/
+dist/
+build/
