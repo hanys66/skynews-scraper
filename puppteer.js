@@ -1,7 +1,9 @@
+// 26-3-2025
+//Using puppeteer
 
-// 29/3/2025 Using PlayWright
+
 const express = require('express');
-const { chromium } = require('playwright');
+const puppeteer = require('puppeteer');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -9,9 +11,12 @@ app.use(express.json());
 
 // Function to scrape movies from TMDb
 async function scrapeMovies() {
-    const browser = await chromium.launch({
-        headless: true ,
-        args: ["--no-sandbox", "--disable-setuid-sandbox"]});
+    const browser = await puppeteer.launch({
+         headless: 'new', // Latest headless mode
+        //executablePath: "'/usr/bin",
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
+
     const page = await browser.newPage();
     const url = `https://www.themoviedb.org/movie/`;
     await page.goto(url, { waitUntil: 'domcontentloaded' });
@@ -27,10 +32,9 @@ async function scrapeMovies() {
             const time = el.querySelector('.content p')?.textContent.trim() || null;
 
             return (title && url && img && time) ? { title, rating, url, img, time } : null;
-        }).filter(movie => movie !== null);
+        }).filter(movie => movie !== null); // Remove null values
     });
-
-    await browser.close();
+      await browser.close();
     return movies;
 }
 
@@ -53,5 +57,4 @@ app.listen(PORT, () => {
 });
 
 module.exports = scrapeMovies;
-
 
