@@ -12,7 +12,7 @@ async function scrapeMovies() {
     const browser = await chromium.launch({
         headless: true,
         args: ["--no-sandbox", "--disable-setuid-sandbox"],
-        executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || undefined // Use Render’s Chromium
+       // executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || undefined // Use Render’s Chromium
     });
     const page = await browser.newPage();
     const url = `https://www.themoviedb.org/movie/`;
