@@ -11,7 +11,15 @@ app.use(express.json());
 async function scrapeMovies() {
     const browser = await chromium.launch({
         headless: true,
-        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+            args: [
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage",  // Prevents Render memory issues
+                "--disable-gpu",            // Disables GPU acceleration
+                "--disable-background-timer-throttling",
+                "--disable-backgrounding-occluded-windows",
+                "--disable-renderer-backgrounding"
+            ],
         executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || undefined // Use Render’s Chromium
     });
     const page = await browser.newPage();
