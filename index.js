@@ -12,11 +12,12 @@ async function scrapeMovies() {
     const browser = await chromium.launch({
         headless: true,
         args: ["--no-sandbox", "--disable-setuid-sandbox"],
-       // executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || undefined // Use Render’s Chromium
+        executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || undefined // Use Render’s Chromium
     });
     const page = await browser.newPage();
     const url = `https://www.themoviedb.org/movie/`;
-    await page.goto(url, { waitUntil: 'domcontentloaded' });
+    await page.goto(url, { waitUntil: 'domcontentloaded' ,
+        timeout: 60000});
     const movies = await page.evaluate(() => {
         const elements = document.querySelectorAll('.card.style_1');
         return Array.from(elements).map(el => {
